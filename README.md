@@ -2,6 +2,9 @@
 
 A sophisticated real-time trading simulator that visualizes dummy stock price data using Simple Moving Average (SMA) strategies. Built with a fully event-driven, modular architecture for scalable financial data processing and visualization.
 
+<img width="1902" height="939" alt="image" src="https://github.com/user-attachments/assets/e2f6f6b0-1b24-4bca-b13a-fe93fade2ef7" />
+
+
 ## 🚀 Features
 
 - **Real-time Data Streaming**: Live stock price updates using WebSockets
@@ -129,42 +132,7 @@ A sophisticated real-time trading simulator that visualizes dummy stock price da
                        └─────────────────┘
 ```
 
-## 📁 Project Structure
 
-```
-trading-simulator/
-├── backend/
-│   ├── app/
-│   │   ├── __init__.py
-│   │   ├── main.py                 # FastAPI application
-│   │   ├── websocket_handler.py    # WebSocket connection management
-│   │   ├── models/
-│   │   │   ├── __init__.py
-│   │   │   └── stock_data.py       # Data models
-│   │   ├── services/
-│   │   │   ├── __init__.py
-│   │   │   ├── redis_service.py    # Redis operations
-│   │   │   └── rabbitmq_service.py # RabbitMQ operations
-│   │   └── utils/
-│   │       ├── __init__.py
-│   │       └── sma_calculator.py   # SMA calculation logic
-│   ├── producer.py                 # Stock price data generator
-│   ├── consumer.py                 # SMA strategy processor
-│   ├── requirements.txt
-│   └── .env.example
-├── frontend/
-│   ├── static/
-│   │   ├── css/
-│   │   │   └── style.css
-│   │   ├── js/
-│   │   │   ├── chart.js           # Plotly.js chart logic
-│   │   │   └── websocket.js       # WebSocket client
-│   │   └── index.html             # Main frontend
-│   └── package.json               # Frontend dependencies
-├── venv/                          # Python virtual environment
-├── docker-compose.yml
-└── README.md
-```
 
 ## 🎯 Key Features Explained
 
@@ -185,57 +153,6 @@ trading-simulator/
 - Zoom, pan, and hover functionality
 - Responsive design for mobile and desktop
 
-## 🔧 Configuration
-
-Key configuration options in `.env`:
-
-```env
-# Redis Configuration
-REDIS_HOST=localhost
-REDIS_PORT=6379
-REDIS_DB=0
-
-# RabbitMQ Configuration
-RABBITMQ_HOST=localhost
-RABBITMQ_PORT=5672
-RABBITMQ_USERNAME=guest
-RABBITMQ_PASSWORD=guest
-
-# Application Settings
-SMA_PERIODS=5,10,20,50
-UPDATE_INTERVAL=1.0
-INITIAL_STOCK_PRICE=100.0
-```
-
-## 🐳 Docker Deployment
-
-```bash
-# Build and run with Docker Compose
-docker-compose up --build
-
-# Run in detached mode
-docker-compose up -d
-```
-
-## 🧪 Testing
-
-```bash
-# Run unit tests
-pytest tests/
-
-# Run with coverage
-pytest --cov=app tests/
-
-# Run integration tests
-pytest tests/integration/
-```
-
-## 📈 Performance Metrics
-
-- **Latency**: Sub-millisecond message processing
-- **Throughput**: 10,000+ messages per second
-- **Scalability**: Horizontal scaling with multiple consumers
-- **Memory Usage**: Efficient Redis-based caching
 
 ## 🤝 Contributing
 
