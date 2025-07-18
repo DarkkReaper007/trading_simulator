@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>📈 Live Stock Price Chart</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    h2 {
+      text-align: center;
+      margin: 20px;
+    }
+    #chart {
+      width: 90%;
+      height: 600px;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <h2>📈 Real-Time Price + SMA Chart</h2>
+  <div id="chart"></div>
+
+  <script>
+    const ws = new WebSocket("ws://localhost:8765");
+
+    const timeData = [];
+    const priceData = [];
+    const smaFastData = [];
+    const smaSlowData = [];
+
+    const layout = {
+      title: 'Live Price + SMA',
+      plot_bgcolor: "#222",
+      paper_bgcolor: "#222",
+      font: { color: "#fff" },
+      xaxis: { title: "Time" },
+      yaxis: { title: "Price" }
+    };
+
+    Plotly.newPlot("chart", [
+      { x: timeData, y: priceData, mode: 'lines', name: 'Price', line: { color: 'yellow' } },
+      { x: timeData, y: smaFastData, mode: 'lines', name: 'SMA Fast', line: { color: 'cyan' } },
+      { x: timeData, y: smaSlowData, mode: 'lines', name: 'SMA Slow', line: { color: 'magenta' } }
+    ], layout);
+
+    ws.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      const timestamp = new Date(data.timestamp * 1000).toLocaleTimeString();
+      timeData.push(timestamp);
+      priceData.push(data.price);
+      smaFastData.push(data.sma_fast);
+      smaSlowData.push(data.sma_slow);
+
+      Plotly.update("chart", {
+        x: [timeData, timeData, timeData],
+        y: [priceData, smaFastData, smaSlowData]
+      });
+    };
+  </script>
+</body>
+</html>
