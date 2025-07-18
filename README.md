@@ -45,8 +45,9 @@ A sophisticated real-time trading simulator that visualizes dummy stock price da
 
 2. **Set up Python environment**
    ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   cd backend
+   python -m venv ../venv
+   source ../venv/bin/activate  # On Windows: ..\venv\Scripts\activate
    pip install -r requirements.txt
    ```
 
@@ -74,6 +75,7 @@ A sophisticated real-time trading simulator that visualizes dummy stock price da
 
 5. **Configure environment variables**
    ```bash
+   cd backend
    cp .env.example .env
    # Edit .env with your configuration
    ```
@@ -82,16 +84,19 @@ A sophisticated real-time trading simulator that visualizes dummy stock price da
 
 1. **Start the FastAPI server**
    ```bash
-   uvicorn main:app --reload --host 0.0.0.0 --port 8000
+   cd backend
+   uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
    ```
 
 2. **Start the price data producer**
    ```bash
+   cd backend
    python producer.py
    ```
 
 3. **Start the SMA strategy consumer**
    ```bash
+   cd backend
    python consumer.py
    ```
 
@@ -128,31 +133,35 @@ A sophisticated real-time trading simulator that visualizes dummy stock price da
 
 ```
 trading-simulator/
-├── app/
-│   ├── __init__.py
-│   ├── main.py                 # FastAPI application
-│   ├── websocket_handler.py    # WebSocket connection management
-│   ├── models/
+├── backend/
+│   ├── app/
 │   │   ├── __init__.py
-│   │   └── stock_data.py       # Data models
-│   ├── services/
-│   │   ├── __init__.py
-│   │   ├── redis_service.py    # Redis operations
-│   │   └── rabbitmq_service.py # RabbitMQ operations
-│   └── utils/
-│       ├── __init__.py
-│       └── sma_calculator.py   # SMA calculation logic
-├── producer.py                 # Stock price data generator
-├── consumer.py                 # SMA strategy processor
-├── static/
-│   ├── css/
-│   │   └── style.css
-│   ├── js/
-│   │   ├── chart.js           # Plotly.js chart logic
-│   │   └── websocket.js       # WebSocket client
-│   └── index.html             # Main frontend
-├── requirements.txt
-├── .env.example
+│   │   ├── main.py                 # FastAPI application
+│   │   ├── websocket_handler.py    # WebSocket connection management
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   └── stock_data.py       # Data models
+│   │   ├── services/
+│   │   │   ├── __init__.py
+│   │   │   ├── redis_service.py    # Redis operations
+│   │   │   └── rabbitmq_service.py # RabbitMQ operations
+│   │   └── utils/
+│   │       ├── __init__.py
+│   │       └── sma_calculator.py   # SMA calculation logic
+│   ├── producer.py                 # Stock price data generator
+│   ├── consumer.py                 # SMA strategy processor
+│   ├── requirements.txt
+│   └── .env.example
+├── frontend/
+│   ├── static/
+│   │   ├── css/
+│   │   │   └── style.css
+│   │   ├── js/
+│   │   │   ├── chart.js           # Plotly.js chart logic
+│   │   │   └── websocket.js       # WebSocket client
+│   │   └── index.html             # Main frontend
+│   └── package.json               # Frontend dependencies
+├── venv/                          # Python virtual environment
 ├── docker-compose.yml
 └── README.md
 ```
